@@ -1,7 +1,9 @@
-lerna 常用用法：
+#### lerna 常用
 
 1. `lerna init`
 创建 lerna 仓库，默认 Fixed 模式。 `lerna init --independent` 可以创建 Independent 模式。
+> Fixed 模式 -> 所有 package 版本一致
+Independent 模式 -> 可以独立控制各个 package 版本
 
 2. `lerna create xxx`
 创建新模块
@@ -51,26 +53,45 @@ lerna 常用用法：
 
 该命令也有许多的参数，例如 `--skip-git` 将不会创建 git commit 或 tag，`--skip-npm` 将不会把包 publish 到 npm 上。
 
-yarn workspaces 常用:
+#### 结合 yarn workspace 与 Lerna 
+```json
+// root -> lerna.json
+{
+  "npmClient": "yarn",
+  "useWorkspaces": true
+}
+```
+
+```json
+// root -> package.json
+{
+  "workspaces": [
+    "packages/*"
+  ],
+}
+```
+
+因 lerna 本身就是基于 yarn 、npm、git 开发，所以开启 yarn workspace 功能仅作如上配置即可。
+
+#### yarn workspaces 常用
 
 1. `yarn install`
 跟 `lerna bootstrap` 效果一致，会自动帮忙解决安装和 link 问题
 
 2. `yarn workspaces info`
-依赖树关系
+各 package 依赖树关系
 
 3. 安装 | 删除依赖
-给某个 package 安装 | 删除依赖：
-`yarn workspace packageB add packageA@xx.xx.xx` 将 packageA 作为 packageB 的依赖进行安装，如果想要不同 package 间的 link，必须明确指定版本号。
-`yarn workspace packageB add -D react`
-删除： `yarn workspace packageB remove packageA`
-
-给根目录 安装 | 删除依赖(适用所有 packages)：
-`yarn add -W -D commitizen` root package 安装 commitizen
-`yarn remove -W commitizen` root package 移除 commitizen
+i. 给某个 package 安装 | 删除依赖：
+  `yarn workspace packageB add packageA@xx.xx.xx` 将 packageA 作为 packageB 的依赖进行安装，如果想要不同 package 间的 link，必须明确指定版本号。
+  `yarn workspace packageB add -D react`
+  删除： `yarn workspace packageB remove packageA`
+ii. 给根目录 安装 | 删除依赖(适用所有 packages)：
+  `yarn add -W -D commitizen` root package 安装 commitizen
+  `yarn remove -W commitizen` root package 移除 commitizen
 
 4. 执行 `scripts`
 运行 packageA 的 dev 命令: `yarn workspace packageA dev`
+每个工作区运行命令: `yarn workspaces run xxx`
 
-这里是在每个工作区运行 run xxx 命令: `yarn workspaces run xxx`
 
