@@ -27,7 +27,12 @@
     "url": "https://github.com/FE-Sadhu/lernaProject/issues"
   },
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "lodash": "^4.17.21",
+    "mok": "1.0.0"
   },
-  "gitHead": "4e0b5440bb37f74a2abc2288464d0900588a1620"
+  "gitHead": "4e0b5440bb37f74a2abc2288464d0900588a1620",
+  "devDependencies": {
+    "underscore": "^1.13.1"
+  }
 }

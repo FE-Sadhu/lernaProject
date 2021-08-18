@@ -1,6 +1,10 @@
 'use strict';
 const mob = require('mob');
+require('mokss');
 module.exports = moa;
+const _ = require('underscore');
+
+console.log(_); // 在 mob 引的 underscore，但提升到了根目录，所以 moa 也可以用这个依赖
 
 function moa() {
     // TODO
